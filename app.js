@@ -32,7 +32,7 @@ fs.createReadStream('participantes.csv')
   .on('data', (participante) => {
     const to = `"${participante.NOME}" <${participante.EMAIL}>`;
 
-    console.log(`ENVIANDO PARA ${to}`);
+    console.log(`ENVIANDO PARA ${to} (ANEXO: ${participante.CERTIFICADO})`);
     transporter
       .sendMail({
         to,
