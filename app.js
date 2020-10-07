@@ -1,18 +1,21 @@
-const fs = require('fs');
-const csv = require('csv-parser');
-
-const conf = require('./conf');
 const multimail = require('./multimail');
+const conf = require('./conf');
 
-fs.createReadStream('participantes.csv')
-  .pipe(csv(['NOME', 'EMAIL', 'CERTIFICADO']))
-  .on('data', async (participante) => {
-    console.log(
-      `ENVIANDO PARA ${participante.NOME}:${participante.EMAIL} (ANEXO: ${participante.CERTIFICADO})`
-    );
-    const ret = await multimail.sendMail(conf, participante);
-    console.log(ret);
+multimail
+  .readCsv('participantes.csv')
+  .then((participantes) => {
+    participantes.forEach((participante) => {
+      console.log(
+        `ENVIANDO PARA ${participante.NOME}:${participante.EMAIL} (ANEXO: ${participante.CERTIFICADO})`
+      );
+      multimail
+        .sendMail(conf, participante)
+        .then((ret) => {
+          console.log(ret);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   })
-  .on('end', () => {
-    console.log('FIM DO CSV');
-  });
+  .catch((err) => console.log(err));
