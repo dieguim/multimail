@@ -1,8 +1,29 @@
 const nodemailer = require('nodemailer');
+const fs = require('fs');
+const csv = require('csv-parser');
+const { resolve } = require('path');
+const { rejects } = require('assert');
 
 class Multimail {
   md(texto, participante) {
     return texto.replace(/#([A-Z]*)/g, (match, p1) => participante[p1]);
+  }
+
+  readCsv(arq) {
+    return new Promise((resolve, reject) => {
+      const participantes = [];
+      fs.createReadStream(arq)
+        .pipe(csv(['NOME', 'EMAIL', 'CERTIFICADO']))
+        .on('data', async (participante) => {
+          participantes.push(participante);
+        })
+        .on('error', (err) => {
+          reject(err);
+        })
+        .on('end', () => {
+          resolve(participantes);
+        });
+    });
   }
 
   sendMail(conf, participante) {
