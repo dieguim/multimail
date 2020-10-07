@@ -4,7 +4,7 @@
   "description": "Envio de e-mails para lista",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "mail"
@@ -14,5 +14,9 @@
   "dependencies": {
     "csv-parser": "^2.3.3",
     "nodemailer": "^6.4.13"
+  },
+  "devDependencies": {
+    "jest": "^26.5.2",
+    "webpack": "^4.44.2"
   }
 }
