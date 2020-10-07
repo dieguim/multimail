@@ -59,14 +59,6 @@ class Multimail {
         },
       ],
     });
-    // .then((res) => {
-    //   console.log(
-    //     `ENVIADA COM SUCESSO from: "${res.envelope.from}" to: "${res.envelope.to}" messageId: "${res.messageId}"`
-    //   );
-    // })
-    // .catch((err) => {
-    //   console.error(`ERRO AO ENVIAR to: ${to}`, err);
-    // });
   }
 }
 module.exports = new Multimail();
