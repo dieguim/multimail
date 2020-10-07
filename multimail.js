@@ -1,8 +1,6 @@
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const csv = require('csv-parser');
-const { resolve } = require('path');
-const { rejects } = require('assert');
 
 class Multimail {
   md(texto, participante) {
