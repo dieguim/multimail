@@ -28,4 +28,16 @@ describe('Testes de Mala Direta', () => {
     const ret = await multimail.sendMail(conf, participante);
     expect(ret.accepted[0]).toEqual(participante.EMAIL);
   });
+
+  it('deve ler mais que zero registros do arquivo CSV', async () => {
+    const lista = await multimail.readCsv('participantes.csv');
+    expect(lista.length).toBeGreaterThan(0);
+  });
+
+  it('deve ler campos do arquivo CSV corretamente', async () => {
+    const lista = await multimail.readCsv('participantes.csv');
+    expect(lista[0]).toHaveProperty('NOME');
+    expect(lista[0]).toHaveProperty('EMAIL');
+    expect(lista[0]).toHaveProperty('CERTIFICADO');
+  });
 });
