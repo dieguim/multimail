@@ -7,7 +7,7 @@ Envio de certificados para lista de participantes
 1. Clone este repositório
 
 ```shell
-$ git clone https://github.com/manejoao/multimail.git
+$ git clone https://github.com/dieguim/multimail.git
 ```
 
 2. Confirme ter o [NodeJs](https://nodejs.org/) instalado em sua máquina. Instale as dependências da aplicação
